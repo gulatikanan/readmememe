@@ -5,7 +5,7 @@ This guide explains how to use the `anurag-hello` package, both as a library in 
 ## Using as a Library
 
 ### Basic Usage
-'''
+```
 from anurag_hello import say_hello
 
 # Default greeting
