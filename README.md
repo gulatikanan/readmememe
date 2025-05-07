@@ -15,7 +15,7 @@ print(result)  # Output: Hello, World!
 # Custom greeting
 result = say_hello("Anurag")
 print(result)  # Output: Hello, Anurag!
-''' 
+```
 
 ### Rich Formatted Output
 
