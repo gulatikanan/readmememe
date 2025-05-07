@@ -5,8 +5,7 @@ This guide explains how to use the `anurag-hello` package, both as a library in 
 ## Using as a Library
 
 ### Basic Usage
-
-```python
+'''
 from anurag_hello import say_hello
 
 # Default greeting
@@ -16,9 +15,11 @@ print(result)  # Output: Hello, World!
 # Custom greeting
 result = say_hello("Anurag")
 print(result)  # Output: Hello, Anurag!
+''' 
+
 ### Rich Formatted Output
 
-```python
+```
 from anurag_hello import print_rich_hello
 
 # Default greeting with rich formatting
@@ -30,7 +31,7 @@ print_rich_hello("Anurag")  # Displays a fancy greeting panel for "Anurag"
 
 ### Complete Example
 
-```python
+```
 from anurag_hello import say_hello, print_rich_hello
 
 def main():
@@ -52,16 +53,17 @@ After installing the package, you can use it from the command line.
 
 ### Getting Help
 
-```bash
+```
 anurag-hello --help
+```
 
-```plaintext
+
 
 This will display the available commands and options.
 
 ### Rich Formatted Greeting
 
-\`\`\`bash
+```
 # Greet the world
 anurag-hello hello
 
@@ -71,7 +73,7 @@ anurag-hello hello Anurag
 
 ### Simple Text Greeting
 
-```bash
+```
 
 # Greet the world
 
@@ -81,13 +83,13 @@ anurag-hello simple
 
 anurag-hello simple Anurag
 
-```plaintext
+```
 
 ## Integration Examples
 
 ### Using in a Script
 
-```python
+```
 #!/usr/bin/env python3
 import sys
 from anurag_hello import say_hello, print_rich_hello
@@ -108,7 +110,7 @@ if __name__ == "__main__":
 
 ### Using in a Larger Application
 
-```python
+```
 from anurag_hello import print_rich_hello
 
 class GreetingService:
@@ -140,66 +142,5 @@ service.greet_user("Anurag")  # Greets "Anurag"
 - Rich formatting only works in terminals that support ANSI color codes.
 
 
-# License
 
-```markdown file="docs/license.md" type="code"
-# License
-
-## MIT License
-
-Copyright (c) 2024 Anurag
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-\`\`\`
-
-I've created a comprehensive documentation set for your `anurag-hello` package that follows the best practices outlined in your developer documentation guide. This includes:
-
-1. **Markdown Cheatsheet**: A complete reference for Markdown syntax
-2. **Sequence Diagrams**: Illustrating the installation and usage flows
-3. **Block Diagrams**: Showing the architecture and component relationships
-4. **Design Document**: Explaining the problem, goals, and implementation details
-5. **MkDocs Configuration**: Ready to use with the Material theme
-6. **API Reference**: Detailed documentation of all public functions
-7. **Usage Guide**: Examples for both library and CLI usage
-8. **Daily Log Template**: For tracking learning progress
-9. **Contributing Guidelines**: For potential contributors
-10. **Changelog**: To track version history
-11. **CLI Commands Reference**: Detailed documentation of all commands
-12. **License**: MIT license information
-
-To use this documentation:
-
-1. Create a `docs` directory in your project
-2. Copy all the Markdown files into the `docs` directory
-3. Copy the `mkdocs.yml` file to your project root
-4. Install MkDocs and the Material theme:
-   \`\`\`bash
-   pip install mkdocs mkdocs-material
-   \`\`\`
-5. Run the documentation locally:
-   \`\`\`bash
-   mkdocs serve
-   \`\`\`
-6. Build the documentation for deployment:
-   \`\`\`bash
-   mkdocs build
-   \`\`\`
-
-This documentation set provides a solid foundation that you can expand upon as your project grows.
 
