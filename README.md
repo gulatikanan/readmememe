@@ -1,9 +1,6 @@
 
 # License
 
-```markdown file="docs/license.md" type="code"
-# License
-
 ## MIT License
 
 Copyright (c) 2024 Anurag
@@ -25,7 +22,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-\`\`\`
+
 
 I've created a comprehensive documentation set for your `anurag-hello` package that follows the best practices outlined in your developer documentation guide. This includes:
 
@@ -48,17 +45,17 @@ To use this documentation:
 2. Copy all the Markdown files into the `docs` directory
 3. Copy the `mkdocs.yml` file to your project root
 4. Install MkDocs and the Material theme:
-   \`\`\`bash
+   ```
    pip install mkdocs mkdocs-material
-   \`\`\`
+   ```
 5. Run the documentation locally:
-   \`\`\`bash
+   ```
    mkdocs serve
-   \`\`\`
+   ```
 6. Build the documentation for deployment:
-   \`\`\`bash
+   ```
    mkdocs build
-   \`\`\`
+   ```
 
 This documentation set provides a solid foundation that you can expand upon as your project grows.
 
