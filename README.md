@@ -1,5 +1,5 @@
 ## Author: KANAN  
-## Level:7 - Observability and System Introspection
+## Level: 7 - Observability and System Introspection
 
 
 This level adds **real-time observability** to the stream processing system, making it transparent, measurable, and understandable.
