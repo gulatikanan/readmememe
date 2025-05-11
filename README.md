@@ -1,75 +1,74 @@
-# 🧾 Text Processing Script — Level 0
+## Author: KANAN  
+## Level: 1 - Parameters and CLI Interface
 
-## Author: KANAN
-## Level: 0 — Basic Script (No Abstraction)  
+## 📝 Overview
 
-## 📌 Description
+In this level, the script becomes a configurable command-line tool using the `typer` library and environment variables.
 
-This is a minimal, single-purpose Python script designed to perform basic text transformation from standard input (stdin) to standard output (stdout). It represents **Level 0** of an incremental software design journey, starting with a quick, unrefactored solution.
+## 🚀 Features
 
-### 🔧 What it Does
+- Accepts CLI arguments using `typer`
+  - `--input`: required input file path
+  - `--output`: optional output file path
+  - `--mode`: optional mode (default from `.env`)
+- Loads default mode from `.env` file using `python-dotenv`
+- Supports two transformation modes:
+  - `uppercase`: convert text to uppercase
+  - `snakecase`: replace spaces with underscores and convert to lowercase
 
-The script:
-- Reads input line-by-line from `stdin`
-- Strips leading and trailing whitespace from each line
-- Converts each cleaned line to **uppercase**
-- Prints the result to `stdout`
-
-## 📁 File Structure
-
-```
-
-abstraction_level_0
-├── process.py     # The main script
-├── sample.txt      # (Optional) Sample input file
-├── output.txt     # (Optional) Captured output
-└── README.md      # Project documentation
-
-````
-
-## ▶️ Usage
-
-### 1. Prepare your input file (optional):
+## 📄 File Structure
 
 ```
-echo " hello guys, 
-python is great!" > input.txt
+abstraction_level_1/
+├── input.txt
+├── .env
+└── process.py
 ```
 
-```
-cat input.txt | python process.py > output.txt
-```
+## ⚙️ Setup
 
-### 2. Run the script from the command line:
+Install dependencies:
 
-```
-python3 process.py < input.txt > output.txt
+```bash
+pip install typer[all] python-dotenv
 ```
 
-### 3. Check the output:
+## 💡 Example Usage
+
+```bash
+# Using default mode from .env (uppercase)
+python process.py --input input.txt
+
+# Write output to a file
+ python process.py --input input.txt --output result.txt
+
+# Override mode to snakecase
+python process.py --input input.txt --mode snakecase
+
+# Write output to a file
+python process.py --input input.txt --output result_snake.txt
+```
+**input.txt**
+```
+hello guys, 
+python is great!
+```
+**Output:**
+```
+HELLO GUYS,
+PYTHON IS GREAT!
+```
+
+## 📂 .env File
 
 ```
-cat output.txt
-# Output:
-# HELLO GUYS, 
-# PYTHON IS GREAT!
-
+MODE=uppercase
 ```
 
-## ✅ Constraints
+## ✅ Checklist
 
-* No functions, classes, or abstractions — just top-to-bottom code.
-* Only built-in Python modules allowed.
-* Focused solely on behavior and correctness for now.
-
-## 📋 Task Checklist
-
-* ✅ Produces correct output for a sample file
-* ✅ Runs without errors from the command line
-* ✅ No refactoring or abstractions added yet
-
-```
-
-> This project is part of a progressive development exercise. Later levels will introduce refactoring, modularity, and testing.
-
-```
+- [x] CLI interface with `typer`
+- [x] Defaults loaded from `.env`
+- [x] Supports `uppercase` and `snakecase` modes
+- [x] Can write to file or print to stdout
+- [x] Logic is separated into clean functions
