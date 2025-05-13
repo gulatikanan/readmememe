@@ -19,7 +19,7 @@ pip install pyyaml
 
 ## 📂 Project Structure
 
-Each task is stored in its own folder: `01_pickle_serialization`, `02_pickle_deserialization`, etc.  
+Each task is stored in its own folder: `task1_pickle_serialization`, `task2_pickle_deserialization`, etc.  
 You can run the programs by navigating into the folder and using:
 
 ```bash
@@ -85,8 +85,8 @@ python <script_name>.py
 - **What:** Serialize and deserialize a `Graph` with nodes and edges.
 - **How:** Using custom `to_dict()` and `load_from_file()` methods.
 - **File:**  
-  - `07_custom_graph_serialization/serialize_graph.py`  
-  - `07_custom_graph_serialization/deserialize_graph.py`
+  - `07_custom_serialization/serialize_graph.py`  
+  - `07_custom_serialization/deserialize_graph.py`
 
 ---
 
@@ -94,7 +94,7 @@ python <script_name>.py
 
 - **What:** Serialize a `User` object but skip sensitive info like `password`.
 - **How:** Manually remove sensitive fields before dumping to JSON.
-- **File:** `08_skip_sensitive_attributes/serialize_user.py`
+- **File:** `08_skipping_attributes/serialize_user.py`
 
 ---
 
@@ -103,8 +103,8 @@ python <script_name>.py
 - **What:** Save and reload the state of a `Game` object.
 - **How:** Save to and read from a file using `json.dump()` and `json.load()`.
 - **File:**  
-  - `09_game_state_persistence/save_game.py`  
-  - `09_game_state_persistence/load_game.py`
+  - `09_restoring_game_state/save_game.py`  
+  - `09_restoring_game_state/load_game.py`
 
 ---
 
@@ -112,8 +112,8 @@ python <script_name>.py
 
 - **What:** Handle changes in object structure while maintaining compatibility with older serialized versions.
 - **Files:**  
-  - `10_object_versioning/create_old_user.py`  
-  - `10_object_versioning/load_old_user_with_new_version.py`
+  - `10_versioning/create_old_user.py`  
+  - `10_versioning/load_old_user_new_version.py`
 
 ---
 
@@ -122,8 +122,8 @@ python <script_name>.py
 - **What:** Serialize a collection object (`MyCollection`) with mixed items.
 - **How:** Serialize the `items` list using JSON.
 - **Files:**  
-  - `11_custom_collection_serialization/serialize_collection.py`  
-  - `11_custom_collection_serialization/deserialize_collection.py`
+  - `11_custom_collections/deserialize.py`
+  - `11_custom_collections/serialize.py`
 
 ---
 
