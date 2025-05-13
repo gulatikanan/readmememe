@@ -1,218 +1,156 @@
-## Author: Kanan
-## Level: 8 - Automated Folder Monitor and Recovery
+# 🗃️ Python Persistence Exercises – File & DB
 
-This system implements a robust, self-running, fault-tolerant file processing tool that continuously monitors folders for new files, processes them through a configurable pipeline, and automatically recovers from failures.
+**Author:** Kanan  
+This project demonstrates how to store and retrieve Python objects using different serialization formats such as Pickle, JSON, and YAML. It also includes handling custom objects, versioning, collections, and cyclic references.
 
-## Motivation
+All outputs from the programs are saved in a file named `output.txt` for reference. You can check it to quickly review inputs and outputs for each task.
 
-Modern data processing systems need to handle files that arrive at unpredictable times:
-- Log files from various applications
-- Transaction batches from business systems
-- User uploads and data submissions
+---
 
-This system addresses these needs with a **persistent, observable, recoverable processing loop** that runs autonomously and maintains processing state even through crashes or restarts.
+## 📦 Requirements
 
-## Features
+Before running the examples, install PyYAML (required for YAML tasks):
 
-- **Continuous Folder Monitoring**: Automatically detects and processes new files
-- **Configurable Processing Pipeline**: Apply multiple transformations to your data
-- **Fault Tolerance & Recovery**: Resumes interrupted work after crashes
-- **Real-time Web Dashboard**: Monitor system status, metrics, and file processing
-- **Observability**: Comprehensive metrics and traces for debugging
-- **Thread Safety**: Properly handles concurrent operations
-
-## Installation
-
-```
-# Clone the repository
-git clone https://github.com/gulatikanan/bootcamp.git
-cd AganithaBootcamp/day_4/abstraction_level_8
-
-# Install dependencies
-pip install fastapi uvicorn
+```bash
+pip install pyyaml
 ```
 
-## Folder Structure
+---
 
-The system uses a folder-based queue with the following structure:
+## 📂 Project Structure
 
-```
-watch_dir/
-├── unprocessed/     # incoming files to watch 
-├── underprocess/    # in-progress files
-├── processed/       # completed successfully
-```
+Each task is stored in its own folder: `01_pickle_serialization`, `02_pickle_deserialization`, etc.  
+You can run the programs by navigating into the folder and using:
 
-## Usage
-
-### Monitor a folder for files
-
-```
-python main.py --monitor ./watch_dir --trace --dashboard
+```bash
+python <script_name>.py
 ```
 
-### Monitor with custom output directory
+---
 
-```
-python main.py --monitor ./watch_dir --output-dir ./results --trace --dashboard
-```
+## ✅ Tasks Performed (Step-by-Step)
 
-### Use a custom configuration
+---
 
-```
-python main.py --monitor ./watch_dir --config pipeline_config.json --trace --dashboard
-```
+### **Step 1: Pickle Serialization**
 
-### Process a single file (still supported)
+- **What:** Serialize a `Person` object to a file.
+- **How:** Using the built-in `pickle` module.
+- **File:** `01_pickle_serialization/serialize.py`
 
-```
-python main.py --file input.txt --output result.txt --trace --dashboard
-```
+---
 
-## File Lifecycle
+### **Step 2: Pickle Deserialization**
 
-1. Files are placed in the `unprocessed/` directory
-2. The system moves them to `underprocess/` while processing
-3. After successful processing, files are moved to `processed/`
-4. If the system crashes during processing, files in `underprocess/` are moved back to `unprocessed/` on restart
+- **What:** Load back the `Person` object from the Pickle file.
+- **How:** `pickle.load()`
+- **File:** `02_pickle_deserialization/deserialize.py`
 
-## Architecture
+---
 
-### Core Components
+### **Step 3: JSON Serialization**
 
-- **FolderMonitor**: Watches for new files and manages the processing lifecycle
-- **MetricsStore**: Singleton for storing metrics, traces, and file statistics
-- **ObservableProcessor**: Base class for processors that collect metrics
-- **Dashboard**: FastAPI web server for monitoring
-- **ObservablePipeline**: Chains processors together
+- **What:** Serialize a `Book` object to JSON.
+- **How:** Using `json.dumps()` and a `to_json()` method.
+- **File:** `03_json_serialization/serialize_book.py`
 
-### Project Structure
+---
 
-```
-level_8_automated_folder_monitor_and_recovery/
-├── README.md
-├── metrics/
-│   ├── __init__.py
-│   ├── metrics_store.py       # Metrics collection and storage
-│   └── tracer.py              # Tracing functionality
-├── processors/
-│   ├── __init__.py
-│   ├── base.py                # Base processor classes
-│   ├── simple.py              # Simple processors (uppercase, filter, etc.)
-│   └── stateful.py            # Stateful processors (counter, aggregator)
-├── pipeline/
-│   ├── __init__.py
-│   └── pipeline.py            # Pipeline implementation
-├── dashboard/
-│   ├── __init__.py
-│   └── server.py              # Web dashboard
-├── config/
-│   ├── __init__.py
-│   └── config_loader.py       # Configuration handling
-├── folder_monitor/
-│   ├── __init__.py
-│   └── file_processor.py      # Folder monitoring implementation
-└── main.py                    # Entry point
-```
+### **Step 4: JSON Deserialization**
 
-### Recovery Mechanism
+- **What:** Create a `Book` object from JSON.
+- **How:** Using `json.loads()` with a `from_json()` class method.
+- **File:** `04_json_deserialization/deserialize_book.py`
 
-The system implements a robust recovery mechanism:
+---
 
-1. On startup, it checks for any files in the `underprocess/` directory
-2. These files are moved back to `unprocessed/` for reprocessing
-3. This ensures that no files are lost if the system crashes during processing
+### **Step 5: YAML Serialization**
 
-## Dashboard
+- **What:** Serialize a `Car` object into YAML format.
+- **How:** Using `yaml.dump()`
+- **File:** `05_yaml_serialization/serialize_car.py`
 
-The web dashboard is available at [http://localhost:8000](http://localhost:8000) when enabled with the `--dashboard` flag.
+---
 
-The dashboard includes:
+### **Step 6: YAML Deserialization**
 
-- **File Processing Status**:
-  - Number of files in each directory
-  - Currently processing file
-  - Recently processed files with timestamps
-- **Processor Metrics**: Lines in/out, processing time, and error counts
-- **Traces**: The path of lines through the system (when enabled with `--trace`)
-- **Errors**: Recent errors with processor information
+- **What:** Load a `Car` object from YAML format.
+- **How:** Using `yaml.safe_load()`
+- **File:** `06_yaml_deserialization/deserialize_car.py`
 
-## Configuration
+---
 
-You can configure processors using a JSON file:
+### **Step 7: Custom Serialization (Graph)**
 
-```
-{
-  "processors": [
-    {
-      "type": "line_counter",
-      "id": "counter",
-      "format": "Line {count}: {line}"
-    },
-    {
-      "type": "uppercase",
-      "id": "uppercase"
-    },
-    {
-      "type": "filter",
-      "id": "important_filter",
-      "pattern": "important"
-    }
-  ]
-}
-```
-## ✅ Checklist
+- **What:** Serialize and deserialize a `Graph` with nodes and edges.
+- **How:** Using custom `to_dict()` and `load_from_file()` methods.
+- **File:**  
+  - `07_custom_graph_serialization/serialize_graph.py`  
+  - `07_custom_graph_serialization/deserialize_graph.py`
 
-* [x] Continuously monitors `unprocessed/`
-* [x] Safely moves files through lifecycle (`underprocess/`, `processed/`)
-* [x] Retries failed or interrupted files
-* [x] Real-time dashboard reflects system state
-* [x] System runs indefinitely, non-blocking
-* [x] Configurable line processors
-* [x] Supports trace + metrics
-* [x] Fully fault-tolerant
+---
 
-## Design Considerations
+### **Step 8: Skip Sensitive Attributes**
 
-- **Thread Safety**: All shared data is protected by locks to ensure thread safety
-- **Non-Blocking**: The processing loop doesn't block the main thread
-- **Idempotency**: The system assumes reprocessing files is harmless
-- **Atomic File Operations**: Uses `shutil.move()` for safe file transitions
+- **What:** Serialize a `User` object but skip sensitive info like `password`.
+- **How:** Manually remove sensitive fields before dumping to JSON.
+- **File:** `08_skip_sensitive_attributes/serialize_user.py`
 
-## Reflection
+---
 
-### Concurrent Instances
+### **Step 9: Restore Game State**
 
-If two instances of this system run at once:
-- They might try to process the same files
-- This could lead to race conditions and duplicate processing
-- Solutions include:
-  - File locking mechanisms
-  - A distributed lock manager
-  - Assigning different files to different instances based on naming patterns
+- **What:** Save and reload the state of a `Game` object.
+- **How:** Save to and read from a file using `json.dump()` and `json.load()`.
+- **File:**  
+  - `09_game_state_persistence/save_game.py`  
+  - `09_game_state_persistence/load_game.py`
 
-### Parallelization
+---
 
-To parallelize processing across threads or nodes:
-- We could use a thread pool to process multiple files concurrently
-- Each thread would need its own set of processors to avoid state conflicts
-- A work queue could distribute files to worker threads/nodes
-- Each worker would need its own `underprocess` directory
+### **Step 10: Versioning Serialized Objects**
 
-### Partial Files
+- **What:** Handle changes in object structure while maintaining compatibility with older serialized versions.
+- **Files:**  
+  - `10_object_versioning/create_old_user.py`  
+  - `10_object_versioning/load_old_user_with_new_version.py`
 
-If a file is only partially written when picked up:
-- The system might process incomplete data
-- Solutions include:
-  - Using file locks during writing
-  - Implementing a "ready" flag (e.g., a companion .ready file)
-  - Checking file modification time and only processing files that haven't been modified for a certain period
-  - Using atomic file operations (write to temp file, then rename)
+---
 
-## Next Steps
+### **Step 11: Custom Collection Serialization**
 
-Future improvements could include:
-- Implementing more sophisticated error handling and retry mechanisms
-- Adding support for different file formats and schemas
-- Implementing a more advanced routing system
-- Adding support for distributed processing across multiple machines
+- **What:** Serialize a collection object (`MyCollection`) with mixed items.
+- **How:** Serialize the `items` list using JSON.
+- **Files:**  
+  - `11_custom_collection_serialization/serialize_collection.py`  
+  - `11_custom_collection_serialization/deserialize_collection.py`
+
+---
+
+### **Step 12: Cyclic References**
+
+- **What:** Serialize two objects that reference each other (e.g., `Manager` and `Employee`).
+- **How:** Use `pickle`, which automatically handles cycles.
+- **Files:**  
+  - `12_cyclic_reference_serialization/serialize_org.py`  
+  - `12_cyclic_reference_serialization/deserialize_org.py`
+
+---
+
+## 📄 Output Storage
+
+- Every output (like print statements) is saved in a file called `output.txt` for easier verification and checking later.
+- Make sure to redirect or write your print outputs to `output.txt` from each script if needed.
+
+---
+
+## 👩‍💻 Author
+
+**Kanan**  
+This project was created to deeply understand Python object persistence and data handling across various formats and use-cases.
+
+---
+
+## 📜 License
+
+This is a learning project. Feel free to reuse any part of it.
